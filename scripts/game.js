@@ -34,12 +34,18 @@
 
         _handleMovementEvent(ev) {
             let alpha = 0;
+            let beta = 0;
             if (ev.keyCode === 37) {
                 alpha = -1;
             } else if(ev.keyCode === 39) {
                 alpha = +1;
+            } else if (ev.keyCode === 40) {
+                beta = +1;
+            } else if (ev.keyCode === 38) {
+                beta = -1;
             }
             this.player.left += alpha * 30;
+            this.player.top += beta * 30;
         }
 
         _gameLoop() {
