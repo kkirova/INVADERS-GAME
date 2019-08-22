@@ -1,26 +1,22 @@
-(function () {
-    const init = function (ctx, bounds) {
-        this.ctx = ctx;
-        this.bounds = bounds;
-        return this;
-    };
+(function (scope) {
+    class Renderer {
+        constructor(ctx, bounds) {
+            this.ctx = ctx;
+            this.bounds = bounds;
+        }
 
-    const clear = function () {
+    clear () {
         const { ctx } = this;
         const { width, height } = this.bounds;
         ctx.clearRect(0, 0, width, height);
-    };
+        }
 
-    const rendererDot = function (left, top) {
+    rendererDot (left, top) {
         const { ctx } = this;
         ctx.fillRect(left, top, 15, 15);
-    };
+        }
+    }
 
-    const renderer = {
-        init,
-        rendererDot,
-        clear,
-    };
-    window.renderer = renderer;
+    scope.Renderer = Renderer;
 
-}());
+}(window));

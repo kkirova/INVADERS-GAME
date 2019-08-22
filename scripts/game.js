@@ -13,7 +13,7 @@
             height,
         };
 
-        this.renderer = renderer.init(ctx, this.bounds);
+        this.renderer = new Renderer(ctx, this.bounds);
         return this;
     };
 
