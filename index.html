@@ -4,18 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>INVADERS</title>
+    <title>SoftUni Invaders</title>
     <link rel="stylesheet" href="style/style.css">
 </head>
 <body>
-    <div id='game-container'></div>
+    <div id="game-container"></div>
     <script src="./scripts/constans.js"></script>
     <script src="./scripts/game-objects-factory.js"></script>
+    <script src="./scripts/collosion-detector.js"></script>
     <script src="./scripts/renderer.js"></script>
     <script src="./scripts/game.js"></script>
     <script>
         const { Game } = window;
-        const game = new Game('#game-container', 1500, 700);
+        const game = new Game('#game-container', 1300, 620);
         game.start();
     </script>
 </body>
