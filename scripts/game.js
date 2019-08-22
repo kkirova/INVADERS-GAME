@@ -1,29 +1,23 @@
 (function (scope) {
-    const {
-        Renderer
-    } = scope;
+    const { Renderer, GameObjectFactory } = scope;
 
-    const dot = {
-        left: 0,
-        top: 100
+    const setupCanvas = function (gameContainer, width, height) {
+        const canvas = document.createElement('canvas');
+        canvas.width = width;
+        canvas.height = height;
+
+        gameContainer.appendChild(canvas);
+        return canvas;
     };
-
-    let iteration = 0;
 
     class Game {
         constructor(selector, width, height) {
-            const gameContainer = document.querySelector(selector);
-            const canvas = document.createElement('canvas');
-            canvas.width = width;
-            canvas.height = height;
-            gameContainer.appendChild(canvas);
-            const ctx = canvas.getContext('2d');
-            this.bounds = {
-                width,
-                height,
-            };
-
-            this.renderer = new Renderer(ctx, this.bounds);
+            this.gameContainer = document.querySelector(selector);
+            this.canvas = setupCanvas(this.gameContainer, width, height);
+            this.bounds = { width, height };
+            this.renderer = new Renderer(this.canvas, this.bounds);
+            this.gameObjectFactory = new GameObjectFactory(width, height);
+            this.player = this.gameObjectFactory.createPlayer();
         }
 
         start() {
@@ -32,16 +26,8 @@
 
         _gameLoop() {
             this.renderer.clear();
-            const {
-                left,
-                top
-            } = dot;
-
-            this.renderer.rendererDot(left, top);
-            const alpha = Math.sin(iteration);
-            iteration++;
-            dot.left += 1;
-            dot.top += alpha * 5;
+            const { top, left } = this.player;
+            this.renderer.renderPlayer(left, top);
             window.requestAnimationFrame(() => {
                 this._gameLoop();
             });
